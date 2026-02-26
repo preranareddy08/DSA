@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> UnionArray(vector<int>& arr1, vector<int>& arr2, int m, int n){
+    vector<int> unionarr;
+    int i = 0, j = 0;
+
+    while(i < m && j < n){
+        if(arr1[i] <= arr2[j]){
+            if(unionarr.empty() || unionarr.back() != arr1[i])
+                unionarr.push_back(arr1[i]);
+            i++;  // ✅ always increment
+        }
+        else{
+            if(unionarr.empty() || unionarr.back() != arr2[j])
+                unionarr.push_back(arr2[j]);
+            j++;  // ✅ always increment
+        }
+    }
+
+    while(i < m){
+        if(unionarr.empty() || unionarr.back() != arr1[i])
+            unionarr.push_back(arr1[i]);
+        i++;
+    }
+
+    while(j < n){
+        if(unionarr.empty() || unionarr.back() != arr2[j])
+            unionarr.push_back(arr2[j]);
+        j++;
+    }
+
+    return unionarr;
+}
+
+int main(){
+    int m, n;
+    cin >> m >> n;
+
+    vector<int> arr1(m), arr2(n);
+
+    for(int i = 0; i < m; i++) cin >> arr1[i];
+    for(int i = 0; i < n; i++) cin >> arr2[i];
+
+    vector<int> res = UnionArray(arr1, arr2, m, n);
+
+    for(int x : res) cout << x << " ";
+}
+
+T.C : O(m+n)
+S.C : O(m+n)
