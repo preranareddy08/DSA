@@ -1,0 +1,42 @@
+#BRUTEFORCE:-
+
+void moveZeroes(vector<int>& nums) {
+        int n = nums.size();
+        vector<int>temp1;
+        for(auto it:nums){
+            if(it!=0) temp1.push_back(it);
+        }
+        for(int i=0;i<temp1.size();i++){
+            nums[i] = temp1[i];
+        }
+        for(int i=temp1.size();i<n;i++){
+            nums[i] = 0;
+        }
+  }
+
+T.C : O(2N)
+S.C : O(N)
+
+
+#OPTIMAL
+
+ void moveZeroes(vector<int>& nums) {
+        int n = nums.size();
+        int j = -1;
+        for(int i=0;i<n;i++){
+            if(nums[i]==0){
+                j=i;
+                break;
+            }
+        }
+        if(j==-1) return;
+        for(int i=j+1;i<n;i++){
+            if(nums[i]!=0){
+              swap(nums[j], nums[i]);
+              j++;
+            } 
+        }
+    }
+
+T.C : O(N)
+S.C : O(1)
